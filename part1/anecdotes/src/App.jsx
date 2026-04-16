@@ -2,11 +2,18 @@ import { useState } from 'react'
 
 const Button = ({onClick, text}) => {
   return (
-    <div>
       <button onClick={onClick}>{text}</button>
-    </div>
   )
 }
+
+const Display = ({sectionTitle, text, count}) => {
+  return (
+    <div>
+      <h1>{sectionTitle}</h1>
+      <div>{text}</div>
+      <div>has {count} votes</div>
+    </div>
+  )}
 
 const App = () => {
   const anecdotes = [
@@ -21,13 +28,35 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [vote, setVote] = useState(Array(anecdotes.length).fill(0))
+  const [currCount, setCurrCount] = useState(0)
+  const [maxCountIndex, setMaxCountIndex] = useState(0);
+  //const [maxVote, setMaxVote] = useState(0);
   const handleQoute = () => {
-    setSelected(Math.round(Math.random() * anecdotes.length))
+    const newIndex = Math.floor(Math.random() * anecdotes.length)
+    setSelected(newIndex)
+    setCurrCount(vote[newIndex])
   }
+  const handleVote = () => {
+    const tempArray = vote 
+
+    tempArray[selected] += 1
+    setVote[tempArray]
+    setCurrCount(tempArray[selected]) 
+    if(tempArray[selected] > tempArray[maxCountIndex]){
+      setMaxCountIndex(selected)
+    }
+  }
+
+
   return (
     <div>
-      {anecdotes[selected]}
-      <Button onClick={handleQoute} text="new qoute" />
+      <Display sectionTitle="Anecdote of the day" text={anecdotes[selected]} count={currCount} />
+      <div>
+        <Button onClick={handleVote} text="vote" />
+        <Button onClick={handleQoute} text="new qoute" />
+      </div>
+      <Display sectionTitle="Anecdote with most votes" text={anecdotes[maxCountIndex]} count={vote[maxCountIndex]} />
     </div>
   )
 }
