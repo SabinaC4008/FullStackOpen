@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 const Header = ({text}) => {
   return (
     <div>
@@ -7,11 +8,8 @@ const Header = ({text}) => {
     </div>
   )
 }
-const Display = ({text}) => {return (<div>{text}</div>)}
 
-const StatisticLine = ({text, value}) => {
-  return (<tr><td>{text}</td><td>{value}</td></tr>)
-}
+const Display = ({text}) => {return (<div>{text}</div>)}
 
 const Button = ({onClick, text}) => {
   return (
@@ -46,16 +44,23 @@ const Statistics = ({good, neutral, bad, all, average, positive}) => {
   )
 }
 
+//Exercise 1.10
+const StatisticLine = ({text, value}) => {
+  return (<tr><td>{text}</td><td>{value}</td></tr>)
+}
 
 const App = () => {
-  // save clicks of each button to its own state
+
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
   const [all, setALL] = useState(0)
   const [average, setAverage] = useState(0.0)
   const [percent, setPercent] = useState(0.0)
   const [percentString, setPercentString] = useState('0 %')
+
+
 
   const goodIncrease = () => {
     setGood(good + 1)
@@ -63,18 +68,22 @@ const App = () => {
     averageCalc((good + 1) + neutral*(0) + bad*(-1), all + 1)
     percentCalc((good + 1), all + 1)
   }
+
   const neutralIncrease = () => {
     setNeutral(neutral + 1)
     allIncrease()
     averageCalc(good + (neutral + 1)*(0) + bad*(-1), all + 1)
     percentCalc(good, all + 1)
   }
+
   const badIncrease = () => {
     setBad(bad + 1)
     allIncrease()
     averageCalc(good + neutral*(0) + (bad + 1)*(-1), all + 1)
     percentCalc(good, all + 1)
   }
+
+
 
   const allIncrease = () => setALL(all + 1)
   const averageCalc = (total, count) => setAverage((total/count))
@@ -84,6 +93,8 @@ const App = () => {
     setPercentString((input.toString()).concat(' %'))
   }
 
+
+  
   return (
     <div>
       <Header text="give feedback" />

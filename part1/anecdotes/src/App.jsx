@@ -15,6 +15,8 @@ const Display = ({sectionTitle, text, count}) => {
     </div>
   )}
 
+
+  
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -31,7 +33,9 @@ const App = () => {
   const [vote, setVote] = useState(Array(anecdotes.length).fill(0))
   const [currCount, setCurrCount] = useState(0)
   const [maxCountIndex, setMaxCountIndex] = useState(0);
-  //const [maxVote, setMaxVote] = useState(0);
+
+
+
   const handleQoute = () => {
     const newIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(newIndex)
