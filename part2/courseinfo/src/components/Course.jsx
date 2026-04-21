@@ -15,9 +15,6 @@ const Part = ({part}) => (
 const Total = ({total}) => <p><b>total of {total} exercises</b></p>
 
 
-
-
-
 const Course = ({course}) => {
   const count = course.parts.reduce((total, curVal) => total + curVal.exercises, 0)
 
