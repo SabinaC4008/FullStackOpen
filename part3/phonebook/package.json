@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-ui": "shx rm -rf dist && cd ../frontend && npm run build && shx cp -r dist ../../part3/backend"
   },
   "dependencies": {
     "express": "^5.2.1",
